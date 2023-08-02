@@ -2,6 +2,7 @@ import time
 import pytest
 from selenium import webdriver
 from pageObjects.loginPage import ValidLogin
+from selenium.webdriver.chrome.options import Options
 
 
 class Test_Case_001_ValidLogin:
@@ -10,7 +11,10 @@ class Test_Case_001_ValidLogin:
     password = "secret_sauce"
 
     def test_validLogin(self):
-        self.driver = webdriver.Chrome()
+        self.options = Options()
+        self.options.add_argument('--headless')
+        self.driver = webdriver.Chrome(options=self.options)
+
         self.driver.get(self.baseUrl)
         self.driver.maximize_window()
         self.v_login = ValidLogin(self.driver)
