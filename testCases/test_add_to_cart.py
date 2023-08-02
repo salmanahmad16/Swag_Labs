@@ -1,6 +1,7 @@
 from pageObjects.addtocartPage import AddToCart
 from selenium import webdriver
 from pageObjects.loginPage import ValidLogin
+from selenium.webdriver.chrome.options import Options
 
 
 class Test_Case_003_AddToCart:
@@ -14,7 +15,9 @@ class Test_Case_003_AddToCart:
     prod2_price = "$9.99"
 
     def test_add_to_cart(self):
-        self.driver = webdriver.Chrome()
+        self.options = Options()
+        self.options.add_argument('--headless')
+        self.driver = webdriver.Chrome(options=self.options)
         self.driver.get(self.baseUrl)
         self.driver.maximize_window()
         self.login = ValidLogin(self.driver)
